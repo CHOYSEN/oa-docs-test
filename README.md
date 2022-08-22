@@ -1,28 +1,32 @@
-# OOOOOOA 分享
+# haiserve-fe
 
 ## 🌍 持续部署
 
 ### Netlify
 
-https://haiserve-articles.netlify.app/
+<https://haiserve-articles.netlify.app/>
 
 ### GitHub Pages
 
-https://haiserve-fe.github.io/articles/
+<https://haiserve-fe.github.io/articles/>
 
-## 📚 如何添加一个专题
+## 📖 分享流程
 
-详见 `/docs/.vitepress/config.ts`
+1. 将 template 文件夹拷贝到相应文件夹内，目录结构为：docs/category/topic
 
-## 📖 如何添加一篇文章
+```sh
+cp -R docs/template docs/react/hooks
+```
 
-1. 在对应的专题文件夹下创建一个新文件夹
-2. 新建 `index.md` 文件
-3. 打开 `/docs/.vitepress/config.ts` 文件，添加链接到专题下
+2. 根据模板，发挥你的才华完成一篇文章
+
+3. 在 `/docs/index.md` 中的 `topic` 和 `title` 中添加文章信息
+
+4. 在 `/docs/.vitepress/config.ts` 中的 `nav` 和 `sidebar` 中配置你的文章
 
 ## 🛠 本地开发
 
-```
+```sh
 yarn install
 yarn dev
 ```

@@ -1,19 +1,37 @@
 import { defineConfig } from "vitepress";
 
 export default defineConfig({
-  title: "OOOOOOA",
+  title: "团队名",
+  markdown: {
+    lineNumbers: true,
+  },
   themeConfig: {
+    outlineTitle: "目录",
+    nav: [{ text: "Home", link: "/" }],
     sidebar: [
-      // React 专题
       {
-        text: "React 专题",
-        items: [{ text: "Hooks 分享", link: "/react/hooks/index" }],
+        text: "Template",
+        items: [{ text: "模板", link: "/template/index" }],
       },
-      // React Native 专题
       {
-        text: "React Native 专题",
-        items: [{ text: "源码分享", link: "/react-native/source/index" }],
+        text: "React",
+        items: [],
       },
+      {
+        text: "Vue",
+        items: [],
+      },
+      {
+        text: "React Native",
+        items: [],
+      },
+      {
+        text: "Technology",
+        items: [],
+      },
+    ],
+    socialLinks: [
+      { icon: "github", link: "https://github.com/haiserve-fe/articles" },
     ],
   },
 });
