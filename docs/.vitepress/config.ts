@@ -1,37 +1,37 @@
-import { defineConfig } from "vitepress";
+import { defineConfig } from 'vitepress';
 
 export default defineConfig({
-  title: "团队名",
+  title: '团队名',
   markdown: {
     lineNumbers: true,
   },
   themeConfig: {
-    outlineTitle: "目录",
-    nav: [{ text: "Home", link: "/" }],
+    outlineTitle: '目录',
+    nav: [{ text: 'Home', link: '/' }],
     sidebar: [
       {
-        text: "Template",
-        items: [{ text: "模板", link: "/template/index" }],
+        text: 'Template',
+        items: [{ text: '模板', link: '/template/index' }],
       },
       {
-        text: "React",
+        text: 'React',
         items: [],
       },
       {
-        text: "Vue",
+        text: 'Vue',
         items: [],
       },
       {
-        text: "React Native",
+        text: 'React Native',
         items: [],
       },
       {
-        text: "Technology",
+        text: 'Technology',
         items: [],
       },
     ],
     socialLinks: [
-      { icon: "github", link: "https://github.com/haiserve-fe/articles" },
+      { icon: 'github', link: 'https://github.com/haiserve-fe/articles' },
     ],
   },
 });
