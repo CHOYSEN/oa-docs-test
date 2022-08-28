@@ -7,7 +7,9 @@ export default defineConfig({
       // React 专题
       {
         text: 'React 专题',
-        items: [{ text: 'Hooks 分享', link: '/react/hooks/index' }],
+        items: [
+          { text: 'React useEffect 前世今生', link: '/react/useEffect/index' },
+        ],
       },
       // React Native 专题
       {
