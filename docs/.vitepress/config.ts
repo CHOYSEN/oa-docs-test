@@ -6,16 +6,12 @@ export default defineConfig({
     lineNumbers: true,
   },
   themeConfig: {
-    outlineTitle: '目录',
-    nav: [{ text: 'Home', link: '/' }],
     sidebar: [
       {
-        text: 'Template',
-        items: [{ text: '模板', link: '/template/index' }],
-      },
-      {
         text: 'React',
-        items: [],
+        items: [
+          { text: 'React useEffect 前世今生', link: '/react/useEffect/index' },
+        ],
       },
       {
         text: 'Vue',
