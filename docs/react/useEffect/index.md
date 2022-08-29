@@ -1,23 +1,21 @@
 # React useEffect 前世今生
 
-## useEffect 常见问题
+在使用 `useEffect` 的时候，我们可能会产生以下的疑问：
 
-先抛几个问题：
-
-1. useEffect 一定要写在函数顶层吗?
+1. `useEffect` 一定要写在函数顶层吗?
 2. useLayoutEffect 和 useEffect 哪个先执行，destroy 呢？
 
-相信读完本文，能够让你对这些问题有更深入的理解。
+相信读完本文后，你能够对这些问题有更深入的理解。
 
-## 为什么有 react hook
+## 为什么有 React Hook
 
-1. react class 组件书写复杂繁重，逻辑不容易复用
-2. 函数组件，无法存储状态
-3. 函数无法拥有声明周期函数，因为每次都会重新调用（不像 class，是一个实例）
+1. class 组件书写复杂繁重，逻辑不容易复用
+2. 函数组件无法存储状态
+3. 函数组件无法拥有声明周期函数，因为每次都会重新调用（但对于 class 组件则不同，实际运行时是一个实例）
 
 ## useEffect 含义
 
-effect, 翻译过来就是副作用。实际上 useEffect 就是一个函数
+effect 翻译过来就是副作用。实际上 `useEffect` 就是一个函数
 
 ## useEffect 用法
 
@@ -47,7 +45,7 @@ export function useEffect(
 }
 ```
 
-## dispatcher 是什么？
+### dispatcher 是什么？
 
 来看下 dispatcher 的结构
 
@@ -88,7 +86,7 @@ useEffect: function (create, deps) {
 }
 ```
 
-## mountEffect 原理
+### mountEffect 原理
 
 那么 mountEffect 又是什么函数呢
 
@@ -109,7 +107,7 @@ function mountEffect(
 
 这里有几个概念，其中
 
-### fiberEffectTag
+#### fiberEffectTag
 
 fiberEffectTag 是 fiber 定义的副作用的 tag，也就是常量，但这里很有意思的是，用的是二进制
 
@@ -131,7 +129,7 @@ export const Snapshot = /*                     */ 0b000000000100000000;
 export const Passive = /*                      */ 0b000000001000000000;
 ```
 
-为什么用二进制呢，我想原有有以下：
+为什么用二进制呢，我想有以下原因：
 
 比如我要表示多个副作用，比如我副作用包含 Placement 和 Update，那么 PlacementAndUpdate = Placement | Update 。按位运算还是很方便的。
 
@@ -270,9 +268,15 @@ function updateEffectImpl(fiberFlags, hookFlags, create, deps): void {
 }
 ```
 
-## useEffect 依赖项对比
+### commit 阶段调用时机
 
-浅比较吗？在更新时会调用到 updateEffectImpl，可以看 updateEffectImpl 的实现，其中有一段 deps 的对比，如以下：
+![react commit](./reactCommit.jpg)
+
+## useEffect 问答
+
+### useEffect 依赖项对比是浅比较吗
+
+在更新时会调用到 updateEffectImpl，可以看 updateEffectImpl 的实现，其中有一段 deps 的对比，如以下：
 
 ```js
 function areHookInputsEqual(
@@ -294,11 +298,7 @@ function areHookInputsEqual(
 
 可以看到，对比的逻辑是，依次取出依赖函数，并且进行 is 比较，Object.is 的实现是一个浅对比，也就是，如果你仅仅是修改了原对象的一个 key 对应的 value 值，就会导致这里并不能触发调用。解决方案是你可以使用 `{...deps}`
 
-### commit 阶段调用时机
-
-![react commit](./reactCommit.jpg)
-
-## useEffect 与 useLayoutEffect
+### useEffect 与 useLayoutEffect 区别
 
 大家可都有个朦胧的概念是，两个副作用的回调的被调用时机是在 DOM 树被更新之后。具体执行时机还得看源码，由上一章节可以看到 useEffect/useLayoutEffect 都会在 commit 阶段被执行
 
@@ -308,32 +308,35 @@ commitBeforeMutationEffects： 调度运行 flushPassiveEffects。这个调度�
 commitMutationEffects: 执行 DOM 操作。这里会附带一些组件的卸载，所以 useLayoutEffect 的销毁函数会在这里被调用。
 commitLayoutEffect: DOM 树已经更新完毕了，此时会先调用 useLayoutEffect 的回调（同步），再进行 flushPassiveEffects 里面的这些 task
 
-## useEffect 一定要写在函数顶层吗?
+### useEffect 一定要写在函数顶层吗?
 
 是的，一定要。因为所有的 hook 都会按顺序依次维护在 hook 链表中。如果不写在顶层，比如某个 hook 加了 if 判断，此时，更新的时候，则会与上一次更新/初始化的 hook 的链表顺序不对应。
 
-## useEffect 可以写 async 吗
+### useEffect 可以写 async 吗
 
-不能直接写
+不能, `useEffect` 第一个参数的 function 需要返回 `undefined` 或者另一个 `funciton`
 
-useEffect 第一个参数的 function 需要返回 undefined 或者另一个 funciton
+### 如果有多个逻辑，使用多个 useEffect 还是一个 useEffect
 
-## 如果有多个逻辑，使用多个 useEffect 还是一个 useEffect
+回答是不同逻辑，应该分开使用不同的 `useEffect`。`componentUpdateQueue.lastEffect` 也会依次存入多个副作用的回调。
 
-回答是不同逻辑，应该分开使用不同的 useEffect。componentUpdateQueue.lastEffect 也会依次存入多个副作用的回调。
+## useEffect 未来发展
 
-## useEffect 依赖项必填吗
+### useEffect 依赖项是必填的吗
 
-```jsx
+```js
 In the future, the second argument might get added automatically by a build-time transformation.
+For more detail, you could wath the share: React Forget：https://www.youtube.com/watch?v=lGEMwh32soc&t=2s
 ```
 
 ## 总结
 
-翻看 useEffect 的源码，会发现 Hooks 的知识，其实与 React fiber、React 渲染的流程（render/commit 阶段）息息相关，也是借助了 fiber，react 才能够在函数中实现了 Hooks 的状态的存储。所以，如果想真正了解透彻 hook 的涉及，就需要深入理解 fiber 的设计以及 react 渲染流程的原理。所以，我们接下来的源码解析将会继续学习：fiber 的设计以及 react 渲染流程。敬请期待
+翻看 `useEffect` 的源码，会发现 Hooks 的知识其实与 fiber、渲染的流程（render/commit 阶段）息息相关，也是借助了 fiber，React 才能够在函数中实现了 Hooks 的状态的存储。所以如果想真正了解透彻 hook 的涉及，就需要深入理解 fiber 的设计以及 React 渲染流程的原理。所以，我们接下来的源码解析将会继续学习 fiber 的设计以及 React 渲染流程，敬请期待！
 
 ## 参考文章
 
 [https://overreacted.io/zh-hans/a-complete-guide-to-useeffect/](https://overreacted.io/zh-hans/a-complete-guide-to-useeffect/)
 
 [全栈潇晨](https://xiaochen1024.com/courseware/60b1b2f6cf10a4003b634718/60b1b374cf10a4003b634725)
+
+> 本文的作者是 Luo，来自 海码团 团队。
