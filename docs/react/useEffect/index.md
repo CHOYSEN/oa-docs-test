@@ -77,7 +77,7 @@ export type Dispatcher = {
 
 所以，在函数组件初始化的时候，dispatcher 为 `HooksDispatcherOnMount`，此时会调用以下函数
 
-```js mount
+```js
 useEffect: function (create, deps) {
   currentHookNameInDev = 'useEffect';
   mountHookTypesDev();
