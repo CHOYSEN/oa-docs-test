@@ -10,7 +10,12 @@
   },
   {
     "text": "Technology",
-    "items": []
+    "items": [
+      {
+        "text": "如何参与前端开源项目",
+        "link": "/technology/how-to-join-open-source/index"
+      }
+    ]
   },
   {
     "text": "React",
