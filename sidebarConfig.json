@@ -1,0 +1,34 @@
+{
+  "sidebar": [
+    {
+      "text": "Template",
+      "key": "template",
+      "items": [
+        {
+          "text": "模板",
+          "link": "/template/index"
+        }
+      ]
+    },
+    {
+      "text": "React",
+      "key": "react",
+      "items": []
+    },
+    {
+      "text": "Vue",
+      "key": "vue",
+      "items": []
+    },
+    {
+      "text": "React Native",
+      "key": "react-native",
+      "items": []
+    },
+    {
+      "text": "Technology",
+      "key": "technology",
+      "items": []
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+import { sidebar } from '../../sidebarConfig.json';
 
 export default defineConfig({
   title: '团队名',
@@ -8,28 +9,7 @@ export default defineConfig({
   themeConfig: {
     outlineTitle: '目录',
     nav: [{ text: 'Home', link: '/' }],
-    sidebar: [
-      {
-        text: 'Template',
-        items: [{ text: '模板', link: '/template/index' }],
-      },
-      {
-        text: 'React',
-        items: [],
-      },
-      {
-        text: 'Vue',
-        items: [],
-      },
-      {
-        text: 'React Native',
-        items: [],
-      },
-      {
-        text: 'Technology',
-        items: [],
-      },
-    ],
+    sidebar,
     socialLinks: [
       { icon: 'github', link: 'https://github.com/haiserve-fe/articles' },
     ],

@@ -3,18 +3,21 @@
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
     "serve": "vitepress serve docs",
-    "format": "prettier --ignore-unknown --ignore-path .gitignore --write ."
+    "format": "prettier --ignore-unknown --ignore-path .gitignore --write .",
+    "init": "node ./scripts/init"
   },
   "dependencies": {
     "vitepress": "^1.0.0-alpha.9",
     "vue": "^3.2.37"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "chalk": "^5.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "simple-git-hooks": "^2.8.0",
-    "@commitlint/cli": "^17.0.3",
-    "@commitlint/config-conventional": "^17.0.3"
+    "prompts": "^2.4.2",
+    "simple-git-hooks": "^2.8.0"
   },
   "prettier": {
     "singleQuote": true
@@ -30,5 +33,6 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  }
+  },
+  "type": "module"
 }
