@@ -481,7 +481,7 @@ export default function combineReducers(reducers: ReducersMapObject) {
 
 通过代码中的注释其实能够大致了解其原理，就是封装了一层去对多个 reducers 进行处理，并将不同 reducer 维护的 state 在各种键值对中进行管理。
 
-另外我们在开发 reducer 的过程中，有没有思考过为什么要返回新的 state ，而不能直接修改原始 state 中的数据？其实是由于下面这行代码导致的
+另外我们在开发 reducer 的过程中，有没有思考过为什么要返回新的 state ，而不能直接修改原始 state 中的数据？其实是由于下面这行代码导致的：
 
 ```ts
 hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
