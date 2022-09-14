@@ -40,16 +40,19 @@ const run = async () => {
     return;
   }
 
-  const __cwd = process.cwd();
-  const folderName = `${__cwd}/docs/${category}/${topic}`;
-  if (fs.existsSync(folderName)) {
+  const categoryPath = `docs/${category}`;
+  if (!fs.existsSync(categoryPath)) {
+    fs.mkdirSync(categoryPath);
+  }
+  const topicPath = `docs/${category}/${topic}`;
+  if (fs.existsSync(topicPath)) {
     console.log(chalk.red('The path already exists.'));
     return;
   }
-  fs.mkdirSync(folderName);
-  fs.writeFileSync(`${folderName}/index.md`, `# ${title}`);
+  fs.mkdirSync(topicPath);
+  fs.writeFileSync(`${topicPath}/index.md`, `# ${title}`);
 
-  const sidebarConfig = fs.readFileSync(`${__cwd}/sidebarConfig.json`, 'utf-8');
+  const sidebarConfig = fs.readFileSync('sidebarConfig.json', 'utf-8');
   const config = JSON.parse(sidebarConfig);
   const sidebar = config.sidebar;
   sidebar[sidebar.findIndex((item) => item.key === category)].items.push({
@@ -60,7 +63,7 @@ const run = async () => {
   const data = JSON.stringify(config, null, 2);
   fs.writeFileSync('sidebarConfig.json', data);
   console.log(
-    chalk.green(`Success! Complete your article in ${folderName}/index.md.`)
+    chalk.green(`Success! Complete your article in ${topicPath}/index.md.`)
   );
   console.log(chalk.green('Have fun writing:)'));
 };
