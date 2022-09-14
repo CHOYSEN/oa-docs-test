@@ -27,7 +27,12 @@ export default defineConfig({
       },
       {
         text: 'Technology',
-        items: [],
+        items: [
+          {
+            text: 'Redux 从使用到源码解读',
+            link: '/technology/redux-analysis/index',
+          },
+        ],
       },
     ],
     socialLinks: [
