@@ -51,7 +51,7 @@ React 的状态管理工具有很多，那本文为什么要选择 Redux 进行�
 
 > Redux 可以集成到任何的 UI 框架中，其中最常见的是 React 。[React-Redux](https://react-redux.js.org/) 是我们的官方包，它可以让 React 组件访问 state 和下发 action 更新 store，从而同 Redux 集成起来。
 
-上面解决了 store 的设计问题，那么如果希望让 Redux 在 UI 框架 React 框架中相互绑定使用，那将需要使用 React-Redux 为我们做这件事情。
+上面的方案解决了 store 的设计问题，如果希望让 Redux 在 UI 框架 React 框架中相互绑定使用，那就需要使用 React-Redux 为我们做这件事情。
 
 可以发现以上都是围绕 Redux 设计的周边生态产物，而 Redux 本身做了哪些事情，又是如何设计的，由此产生了这篇文章。
 
