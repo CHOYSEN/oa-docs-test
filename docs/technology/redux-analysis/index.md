@@ -537,7 +537,7 @@ export default function bindActionCreators(
 
 ### compose
 
-从源码注释中可以看到，其作用是从右到左来组合多个函数，属于函数式编程中的方法。该方法可接收多个函数，本质上是对传入的函数从右到左执行。其返回值为从右到左把接收到的函数合成后的最终函数，并且其最右的函数支持传入多个参数。
+从源码注释中可以看到，其作用是从右到左来组合调用多个函数，属于函数式编程中的方法。该方法可接收多个函数，本质上是对传入的函数从右到左执行。其返回值为从右到左把接收到的函数合成后的最终函数，并且其最右的函数支持传入多个参数。
 
 ```ts
 // src/compose.ts
@@ -551,6 +551,7 @@ export default function compose(...funcs: Function[]) {
     return funcs[0];
   }
 
+  // 遍历所有函数，并每次都调用下一个函数并将返回值作为当前函数的参数传入
   return funcs.reduce(
     (a, b) =>
       (...args: any) =>
@@ -559,9 +560,36 @@ export default function compose(...funcs: Function[]) {
 }
 ```
 
+看上面的源码实现可能会比较抽象，举个例子来看这个函数的执行流程是怎么样的
+
+```ts
+function a() {
+  console.log('==> a');
+}
+function b() {
+  console.log('==> b');
+}
+function c() {
+  console.log('==> c');
+}
+compose(a, b, c)();
+```
+
+上面示例的代码执行结果将会是
+
+```ts
+==> c
+==> b
+==> a
+```
+
+而代码的执行流程可以通过一张图来描述，本质上就是函数链式调用的过程。
+
+![svg](./6.svg)
+
 ### applyMiddleware
 
-该函数主要是为了实现对 store 的增强而设计的，其使用了洋葱模型进行整体结构设计，下面附上模型图，并且利用了 compose 函数辅助实现了这套模型。
+该函数主要是为了实现对 store 的增强而设计的，其使用了洋葱模型进行整体结构设计，下面附上模型图，并且利用了 compose 函数链式调用的能力辅助实现了这套模型。
 
 ![image](./5.png)
 
