@@ -10,10 +10,15 @@
 
 <https://haiserve-fe.github.io/articles/>
 
+## 📖 添加文章
+
+```sh
+yarn run init
+```
+
 ## 🛠 本地开发
 
 ```sh
 yarn install
-yarn run init
 yarn dev
 ```

@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress';
-import { sidebar } from '../../sidebarConfig.json';
+import sidebar from './sidebarConfig.json';
 
 export default defineConfig({
   title: '团队名',
