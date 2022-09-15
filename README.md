@@ -13,7 +13,7 @@
 ## 📖 添加文章
 
 ```sh
-yarn run init
+yarn run create
 ```
 
 ## 🛠 本地开发
