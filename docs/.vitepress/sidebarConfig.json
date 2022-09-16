@@ -1,0 +1,27 @@
+[
+  {
+    "text": "Template",
+    "items": [
+      {
+        "text": "模板",
+        "link": "/template/index"
+      }
+    ]
+  },
+  {
+    "text": "Technology",
+    "items": []
+  },
+  {
+    "text": "React",
+    "items": []
+  },
+  {
+    "text": "React Native",
+    "items": []
+  },
+  {
+    "text": "Vue",
+    "items": []
+  }
+]
