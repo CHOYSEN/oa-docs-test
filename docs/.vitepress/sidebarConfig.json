@@ -14,7 +14,12 @@
   },
   {
     "text": "React",
-    "items": []
+    "items": [
+      {
+        "text": "useEffect前世今生",
+        "link": "/react/useEffect/index"
+      }
+    ]
   },
   {
     "text": "React Native",
