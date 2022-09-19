@@ -1,0 +1,1 @@
+import{_ as t,c as d,o as e,a as r}from"./app.0c009fcf.js";const p=JSON.parse('{"title":"Schedule","description":"","frontmatter":{},"headers":[],"relativePath":"index.md"}'),a={name:"index.md"},o=r("",2),h=[o];function c(n,i,s,_,l,u){return e(),d("div",null,h)}const y=t(a,[["render",c]]);export{p as __pageData,y as default};
